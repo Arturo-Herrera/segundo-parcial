@@ -13,13 +13,14 @@
         $query="INSERT INTO sales(seller_id, property_id, sale_date) VALUES ($seller_id, $property_id, '$sale_date');";
 
         try {
-
-            $response = mysqli_query($db, $query);
-            echo "<p>Sale recorded!<p>";
-
+                $response = mysqli_query($db, $query);
+                if ($response) {
+                    echo "<p>Sale recorded!<p>";
+                } else {
+                    throw new Exception("Sale not recorded: " . mysqli_error($db));
+                }
         } catch (Exception  $e) {
-            echo "<p>Error: Sale not recorded: {$e->getMessage()}<p>";
-        
+            echo "<p>Error: {$e->getMessage()}<p>";
         }
     }
 
@@ -30,7 +31,7 @@
         $sellers = mysqli_query($db, $querySeller);
         $properties = mysqli_query($db, $queryProperty);
         
-        if (!$sellers && !$properties) {
+        if (!$sellers || !$properties) {
             throw new Exception("Error: " . mysqli_error($db));
         }
     } catch (Exception $e) {
