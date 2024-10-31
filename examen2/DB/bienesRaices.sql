@@ -39,7 +39,7 @@ CREATE TABLE sales (
 
 INSERT INTO seller VALUES
 (1001, "Foo Bar", "foo@bar.com", 1234567890),
-(2002, "Bar Foo", "bar@foo.com", 0987654321);
+(2002, "Bar Foo", "bar@foo.com", 9987654321);
 
 INSERT INTO propierties (title, price, image, description, rooms, wc, garage, timestap, id_seller)
 VALUES
