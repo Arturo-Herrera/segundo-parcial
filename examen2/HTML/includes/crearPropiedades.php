@@ -27,7 +27,7 @@ $db = connectdb();
         }
 
         try {
-            $query = "SELECT id, name FROM sellers;";
+            $query = "SELECT id, name FROM seller;";
             
             $sellers = mysqli_query($db, $query);
             
