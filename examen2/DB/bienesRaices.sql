@@ -25,6 +25,16 @@ CREATE TABLE propierties (
     CONSTRAINT fk_seller FOREIGN KEY (id_seller) REFERENCES seller(id)
 );
 
+CREATE TABLE sales (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    propierty_id INT,
+    seller_id INT,
+    sale_date DATE,
+    CONSTRAINT fk_propierty FOREIGN KEY (propierty_id) REFERENCES propierties(id),
+    CONSTRAINT fk_seller FOREIGN KEY (seller_id) REFERENCES seller(id)
+);
+
+
 /*INSERT'S*/
 
 INSERT INTO seller VALUES
