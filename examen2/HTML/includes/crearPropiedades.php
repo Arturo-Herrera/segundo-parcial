@@ -3,65 +3,43 @@ include "../includes/header.php";
 require "../includes/config/connect.php";
 
 $db = connectdb();
-$errors = [];
 
-$query = "select name from sellers";
+    if($_SERVER['REQUEST_METHOD']=='POST'){
 
-$response = mysqli_query($db, $query);
+        $title = $_POST['title'];
+        $price = $_POST['price'];
+        $image = $_POST['image'];
+        $description = $_POST['description'];
+        $rooms = $_POST['rooms'];
+        $wc = $_POST['wc'];
+        $timestamp = $_POST['timestamp'];
+        $id_seller = $_POST['seller_id'];
 
-while ($seller = mysqli_fetch_assoc($response)) {
-    echo $seller['name'];
-    }
+        $query = "INSERT INTO propierties (title, price, image, description, rooms, wc, timestamp, id_seller) VALUES "
+                        ."('$title', $price, '$image', '$description', $rooms, $wc, '".date("Y-m-d")."', $id_seller)";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        try {
+            $response = mysqli_query($db, $query);
+            echo "<p>Property Created!<p>";
 
-    $title = trim($_POST["title"]);
-    if (empty($title)) $errors[] = "Title is required.";
+        } catch (Exception  $e) {
+            echo "<p>Error: Property not created: {$e->getMessage()}<p>";
+        }
 
-    $price = $_POST["price"];
-    if (empty($price) || !is_numeric($price) || $price <= 0) $errors[] = "Price must be a positive number.";
-
-    $img = $_FILES["img"];
-    if (empty($img['name'])) $errors[] = "Image is required.";
-
-    $description = trim($_POST["description"]);
-    if (empty($description)) $errors[] = "Description is required.";
-
-    $rooms = $_POST["rooms"];
-    if (empty($rooms) || !is_numeric($rooms) || $rooms < 0) $errors[] = "Rooms must be a non-negative number.";
-
-    $wc = $_POST["wc"];
-    if (empty($wc) || !is_numeric($wc) || $wc < 0) $errors[] = "WC must be a non-negative number.";
-
-    $garage = $_POST["garage"];
-    if (empty($garage) || !is_numeric($garage) || $garage < 0) $errors[] = "Garage must be a non-negative number.";
-
-    $timestamp = $_POST["timestamp"];
-    if (empty($timestamp) || !preg_match('/\d{4}-\d{2}-\d{2}/', $timestamp)) $errors[] = "Invalid date format for timestamp.";
-
-    $seller = $_POST["seller"];
-    if (empty($seller) || !is_numeric($seller)) $errors[] = "Seller ID must be a valid number.";
-    
-
-    if (empty($errors)) {
-        $imgPath = "uploads/" . basename($img["name"]);
-        move_uploaded_file($img["tmp_name"], $imgPath);
-
-        $query = "INSERT INTO propierties (title, price, image, description, rooms, wc, garage, timestap, id_seller) VALUES ('$title', '$price', '$imgPath', '$description', '$rooms', '$wc', '$garage', '$timestamp', '$seller');";
+        try {
+            $query = "SELECT id, name FROM sellers;";
+            
+            $sellers = mysqli_query($db, $query);
+            
+            if (!$sellers) {
+                throw new Exception("Error: " . mysqli_error($db));
+            }
         
-        $response = mysqli_query($db, $query);
-
-        if ($response) {
-            echo "Property added successfully";
-        } else {
-            echo "Error adding property: " . mysqli_error($db);
+        } catch (Exception $e) {
+            echo "<p>Error: {$e->getMessage()}</p>";
         }
-    } else {
-        foreach ($errors as $error) {
-            echo "<p>$error</p>";
-        }
+    
     }
-}
 ?>
 
     <section>
@@ -103,8 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="date" name="timestamp" id="timestamp">
                     </div>
                     <div>
-                        <label for="seller">Seller</label>
-                        <input type="number" name="seller" id="seller">
+                    <label for="seller_id">Select the seller</label>
+                        <select name="seller_id" id="seller_id">
+                            <?php while ($seller = mysqli_fetch_assoc($sellers)) { ?>
+                                <option value="<?php echo $seller['id']; ?>"><?php echo $seller['name']; ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div>
                         <button type="submit">Create a new propierty</button>
