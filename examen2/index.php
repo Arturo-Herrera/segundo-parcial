@@ -1,6 +1,6 @@
 <?php
-    include"../11-10-24/HTML/includes/header.php";
-    require "../11-10-24/HTML/includes/config/connect.php";
+    include"HTML/includes/header.php";
+    require "HTML/includes/config/connect.php";
     $db = connectdb();
     
 ?>
