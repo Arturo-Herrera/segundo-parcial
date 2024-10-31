@@ -26,12 +26,12 @@ CREATE TABLE propierties (
 );
 
 CREATE TABLE sales (
-    propierty_id INT,
-    seller_id INT,
+    property_id INT(11),
+    seller_id INT(11),
     sale_date DATE,
     PRIMARY KEY (property_id, seller_id, sale_date),
-    CONSTRAINT fk_propierty FOREIGN KEY (propierty_id) REFERENCES propierties(id),
-    CONSTRAINT fk_seller FOREIGN KEY (seller_id) REFERENCES seller(id)
+    CONSTRAINT fk_property_sales FOREIGN KEY (property_id) REFERENCES propierties(id),
+    CONSTRAINT fk_seller_sales FOREIGN KEY (seller_id) REFERENCES seller(id)
 );
 
 
