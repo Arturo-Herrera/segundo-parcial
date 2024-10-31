@@ -11,10 +11,9 @@
         <header>
             <nav>
                 <a href="../index.php">Home</a>
-                <a href="../HTML/nosotros.php">Nosotros</a>
-                <a href="../HTML/anuncios.php">Anuncios</a>
-                <a href="../HTML/contactanos.php">Contacto</a>
-                <a href="../HTML/blog.php">Blog</a>
+                <a href="../HTML/includes/crearPropiedades.php">Propiedades</a>
+                <a href="../HTML/includes/crearSellers.php">Sellers</a>
+                <a href="../HTML/includes/crearVentas.php">Ventas</a>
             </nav>
             <h2>Venta de casas y departamentos</h2>
             <!--Imagen y sombra-->
