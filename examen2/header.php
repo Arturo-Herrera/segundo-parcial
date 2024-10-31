@@ -10,10 +10,10 @@
         <h1>BIENES RAICES</h1>
         <header>
             <nav>
-                <a href="../index.php">Home</a>
-                <a href="../HTML/includes/crearPropiedades.php">Propiedades</a>
-                <a href="../HTML/includes/crearSellers.php">Sellers</a>
-                <a href="../HTML/includes/crearVentas.php">Ventas</a>
+                <a href="index.php">Home</a>
+                <a href="crearPropiedades.php">Propiedades</a>
+                <a href="crearSellers.php">Sellers</a>
+                <a href="crearVentas.php">Ventas</a>
             </nav>
             <h2>Venta de casas y departamentos</h2>
             <!--Imagen y sombra-->

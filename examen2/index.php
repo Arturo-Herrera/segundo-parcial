@@ -1,6 +1,6 @@
 <?php
-    include"HTML/includes/header.php";
-    require "HTML/includes/config/connect.php";
+    include"header.php";
+    require "connect.php";
     $db = connectdb();
     
 ?>
@@ -91,5 +91,5 @@
         </div>
     </section>
 <?php
-include"HTML/includes/footer.php";
+include"footer.php";
 ?>

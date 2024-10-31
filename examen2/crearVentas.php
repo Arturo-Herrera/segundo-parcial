@@ -1,6 +1,6 @@
 <?php
-    include "../includes/header.php";
-    require "../includes/config/connectdb.php";
+    include "header.php";
+    require "connect.php";
 
     $db = connectdb();
 
@@ -25,7 +25,7 @@
     }
 
     try {
-        $querySeller = "SELECT id, name FROM sellers;";
+        $querySeller = "SELECT id, name FROM seller;";
         $queryProperty = "SELECT id, title FROM propierties;";
 
         $sellers = mysqli_query($db, $querySeller);
@@ -74,5 +74,5 @@
 </section>
 
 <?php
-include "../includes/footer.php";
+include "footer.php";
 ?>

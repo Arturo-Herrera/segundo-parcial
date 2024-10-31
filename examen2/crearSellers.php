@@ -1,9 +1,9 @@
 <?php
-    include "../includes/header.php";
-
-    require "../includes/config/connect.php";
+    include "header.php";
+    require "connect.php";
     $db = connectdb();
 
+    if($_SERVER['REQUEST_METHOD']=='POST'){
     $id= $_POST["id"];
     $name= $_POST["name"];
     $email= $_POST["email"];
@@ -13,12 +13,19 @@
 
     $response = mysqli_query($db, $query);
 
-    if (mysqli_num_rows($response) > 0) {
+    try {
+        $response = mysqli_query($db, $query);
+
+        if ($response === false) {
+            throw new Exception('Error en la consulta a la base de datos: ' . mysqli_error($db));
+        }
+
         echo "Seller added successfully";
-        } else {
-            echo "Error adding seller";
-            }
-    
+        
+    } catch (Exception $e) {
+        echo "Excepción capturada: " . $e->getMessage();
+    }
+    }
 ?>
 
 <section>
@@ -48,5 +55,5 @@
 </section>
 
 <?php
-include "../includes/footer.php";
+include "footer.php";
 ?>
