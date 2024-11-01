@@ -4,12 +4,11 @@
     $db = connectdb();
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
-    $id= $_POST["id"];
     $name= $_POST["name"];
     $email= $_POST["email"];
     $phone= $_POST["phone"];
 
-    $query = "INSERT INTO sellers (name, email, phone) VALUES  ('$name', '$email', '$phone');";
+    $query = "INSERT INTO seller (name, email, phone) VALUES "." ('$name', '$email', '$phone');";
 
     $response = mysqli_query($db, $query);
 
@@ -31,7 +30,7 @@
 <section>
     <h2>Sellers</h2>
     <div>
-        <form action="crearSeller.php" method="post">
+        <form action="crearSellers.php" method="post">
             <fieldset>
                 <legend>Fill all fields to create a new seller</legend>
                 <div>

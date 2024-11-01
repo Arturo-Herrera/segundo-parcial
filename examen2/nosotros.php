@@ -1,5 +1,5 @@
 <?php
-include"../HTML/includes/header.php";
+include"header.php";
 ?>
     <section>
         <h2>Conoce sobre nosotros</h2>
@@ -25,5 +25,5 @@ include"../HTML/includes/header.php";
         </div>
     </section>
 <?php
-include"../HTML/includes/footer.php";
+include"footer.php";
 ?>
